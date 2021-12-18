@@ -13,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MapperScan("com.fanjie.sts.mapper")
 public class ShoesTrendServerApplication {
 
+
     public static void main(String[] args) {
         SpringApplication.run(ShoesTrendServerApplication.class, args);
     }

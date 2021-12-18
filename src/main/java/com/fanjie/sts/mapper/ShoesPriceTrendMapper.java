@@ -13,8 +13,11 @@ public interface ShoesPriceTrendMapper {
 
     /**
      * 根据货号获取价格趋势
+     *
      * @param articleNumber
      * @return
      */
-    List<ShoesPriceTrend> selectShoesPriceTrend(@Param("articleNumber") String articleNumber);
+    List<ShoesPriceTrend> selectShoesPriceTrend(@Param("articleNumber") String articleNumber,
+                                                @Param("startTime") String startTime,
+                                                @Param("endTime") String endTime);
 }

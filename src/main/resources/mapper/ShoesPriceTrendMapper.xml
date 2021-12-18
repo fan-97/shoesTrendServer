@@ -16,19 +16,29 @@
 
     <select id="selectShoesPriceTrend" resultMap="priceTrend">
         SELECT detail.spu_id as spu_id,
-               detail.title as title,
-               detail.article_number as article_number,
-               p.`value` as value,
-               price.min_price as min_price,
-               price.create_time as create_time,
-               price.trade_type as trade_type
+        detail.title as title,
+        detail.article_number as article_number,
+        p.`value` as value,
+        price.min_price as min_price,
+        price.create_time as create_time,
+        price.trade_type as trade_type
         FROM product_details AS detail,
-             product_sku AS sku,
-             product_property AS p,
-             product_price_info AS price
-        WHERE detail.spu_id = p.spu_id
-          AND p.property_value_id = sku.property_value_id
-          AND sku.sku_id = price.sku_id
-          AND article_number = #{articleNumber}
+        product_sku AS sku,
+        product_property AS p,
+        product_price_info AS price
+        <where>
+            detail.spu_id = p.spu_id
+            AND p.property_value_id = sku.property_value_id
+            AND sku.sku_id = price.sku_id
+            <if test="articleNumber != null">
+                AND article_number = #{articleNumber}
+            </if>
+            <if test="startTime != null">
+                AND price.create_time &gt;= #{startTime}
+            </if>
+            <if test="endTime != null">
+                AND price.create_time &lt;= #{endTime}
+            </if>
+        </where>
     </select>
 </mapper>
